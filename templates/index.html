@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+    <title>Testing...</title>
+</head>
+<body style="background-color: rgb(47, 75, 76);">
+
+    {% if error is defined %}
+        <h1>{{ error }}</h1>
+        <form action="/" methods="GET">
+            <input type="hidden"/>
+            <button type="submit">RESTART</button>
+        </form>
+    {% else %}
+
+    <h2>{{ num_cats }}</h2>
+
+    {% for i in cat_list %}
+        <h1>Cat name: {{ i }}</h1>
+    {% endfor %}
+
+    <form action="/remove-cat" methods="GET">
+        <input type="hidden"/>
+        <button type="submit">REMOVE CAT</button>
+    </form>
+
+    {% if details_page is defined %}
+
+    <form action="/" methods="GET">
+        <input type="hidden"/>
+        <button type="submit">RESTART</button>
+    </form>
+    <form action="/add-cat" methods="GET">
+        <input type="hidden"/>
+        <button type="submit">ADD CAT</button>
+    </form>
+    {% endif %}
+    {% endif %}
+</body>
+</html>
