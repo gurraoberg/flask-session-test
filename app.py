@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, redirect, url_for
 
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -31,9 +31,13 @@ def add_many_cats():
         cat_list.append(cat)
 
     num_cats = len(cat_list)
-    print(num_cats)
+
     session['num_cats'] = num_cats # Set sessions total cats
     session['cat_list'] = cat_list # Set sessions new cat list
+    
+    if num_cats > 100:
+        return redirect(url_for('index'))
+
     return render_template('index.html',
                            cat_list=cat_list,
                            details_page=details_page,
@@ -53,7 +57,9 @@ def add_cat():
     num_cats = len(cat_list)
     session['num_cats'] = num_cats # Set sessions total cats
     session['cat_list'] = cat_list # Set sessions new cat list
-
+    
+    if num_cats > 100:
+        return redirect(url_for('index'))
 
     return render_template('index.html',
                            cat_list=cat_list,
@@ -63,7 +69,7 @@ def add_cat():
 
 @app.route('/remove-cat')
 def details():
-    
+
     cat_list = session.get('cat_list')
     num_cats = session.get('num_cats') # Get current amount of cats
 
