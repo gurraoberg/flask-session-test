@@ -20,6 +20,25 @@ def handle_data():
         cat_list.append(cat['name'])
     return cat_list
 
+@app.route('/add-many-cats')
+def add_many_cats():
+
+    cat_list = session.get('cat_list') # Get sessions old cat list
+    details_page = session.get('details_page')
+
+    for i in range(1, 51): # Add 50 cats
+        cat = f"Mjau{i}"
+        cat_list.append(cat)
+
+    num_cats = len(cat_list)
+    print(num_cats)
+    session['num_cats'] = num_cats # Set sessions total cats
+    session['cat_list'] = cat_list # Set sessions new cat list
+    return render_template('index.html',
+                           cat_list=cat_list,
+                           details_page=details_page,
+                           num_cats=num_cats)
+
 @app.route('/add-cat')
 def add_cat():
 
