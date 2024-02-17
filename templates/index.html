@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <head>
     <title>Testing... Changees...</title>
+    <style>
+        .buttons {
+            position: fixed;
+            margin: 0 auto;
+            left: 18%;
+            top: 5%;
+        }
+        button {
+            background-color: #ccc; /* Grayscale background */
+            color: #000; /* Text color */
+            padding: 10px 20px; /* Padding */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Cursor style */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+        button:hover {
+            background-color: #999; /* Darker grayscale background on hover */
+            color: #fff; /* Text color on hover */
+        }
+    </style>
 </head>
 <body style="background-color: rgb(47, 75, 76);">
 
@@ -10,6 +31,7 @@
             <input type="hidden"/>
             <button type="submit">RESTART</button>
         </form>
+    </br>
     {% else %}
 
     <h2>{{ num_cats }}</h2>
@@ -17,27 +39,30 @@
     {% for i in cat_list %}
         <h1>Cat name: {{ i }}</h1>
     {% endfor %}
-
+    <div class="buttons">
     <form action="/remove-cat" methods="GET">
         <input type="hidden"/>
         <button type="submit">REMOVE CAT</button>
     </form>
-
+    </br>
     {% if details_page is defined %}
 
     <form action="/" methods="GET">
         <input type="hidden"/>
         <button type="submit">RESTART</button>
     </form>
+</br>
     <form action="/add-cat" methods="GET">
         <input type="hidden"/>
         <button type="submit">ADD CAT</button>
     </form>
+</br>
     <form action="/add-many-cats" methods="GET">
         <input type="hidden"/>
         <button type="submit">ADD MANY CATS</button>
     </form>
     {% endif %}
     {% endif %}
+</div>
 </body>
 </html>
